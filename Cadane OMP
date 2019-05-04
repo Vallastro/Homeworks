@@ -31,8 +31,6 @@ subroutine GetMaxCoordinates(A, x1, y1, x2, y2)
     y1=1
     x2=1
     y2=1
-    
-    call omp_set_num_threads(4)
 
     !$omp parallel shared(x1, y1, x2, y2, n, max_sum, B) default(private)
     !$omp do schedule(dynamic)
