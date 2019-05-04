@@ -2,7 +2,7 @@ module Task
 use omp_lib
 implicit none
 contains
-    subroutine GetMaxCoordinates(A, x1, y1, x2, y2)
+subroutine GetMaxCoordinates(A, x1, y1, x2, y2)
     implicit none
     real(8), intent(in), dimension(:,:) :: A
     integer(4), intent(out) :: x1, y1, x2, y2
@@ -73,36 +73,35 @@ contains
         x2 = tmp
     endif
 
-    end subroutine
+end subroutine
 
 
-    subroutine FindMaxInArray(a, Sum, Up, Down)
-        real(8), intent(in), dimension(:) :: a
-        integer(4), intent(out) :: Up, Down
-        real(8), intent(out) :: Sum
-        real(8) :: cur_sum
-        integer(4) :: minus_pos, i
+subroutine FindMaxInArray(a, Sum, Up, Down)
+    real(8), intent(in), dimension(:) :: a
+    integer(4), intent(out) :: Up, Down
+    real(8), intent(out) :: Sum
+    real(8) :: cur_sum
+    integer(4) :: minus_pos, i
 
-        Sum = a(1)
-        Up = 1
-        Down = 1
-        cur_sum = 0
-        minus_pos = 0
+    Sum = a(1)
+    Up = 1
+    Down = 1
+    cur_sum = 0
+    minus_pos = 0
 
-        do i=1, size(a)
-            cur_sum = cur_sum + a(i)
-            if (cur_sum > Sum) then
-                Sum = cur_sum
-                Up = minus_pos + 1
-                Down = i
-            endif
+    do i=1, size(a)
+        cur_sum = cur_sum + a(i)
+        if (cur_sum > Sum) then
+            Sum = cur_sum
+            Up = minus_pos + 1
+            Down = i
+        endif
 
-            if (cur_sum < 0) then
-                cur_sum = 0
-                minus_pos = i
-            endif
-        enddo
-
-    end subroutine FindMaxInArray
+        if (cur_sum < 0) then
+            cur_sum = 0
+            minus_pos = i
+        endif
+    enddo    
+end subroutine FindMaxInArray
 
 end module Task
